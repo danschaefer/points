@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import {Container} from "@mui/material";
+import Range from "./Range";
 
-function App() {
+export default function App() {
+
+    function handleRange(year,month) {
+        console.log(`YEAR: ${year}  Month: ${month}`);
+        // TODO
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App" maxWidth="lg">
+        <h1 className="AppTitle">
+            Get Your Points Here
+        </h1>
+        <Range handleRange={handleRange} />
+    </Container>
   );
 }
 
-export default App;
