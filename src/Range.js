@@ -1,7 +1,9 @@
+// Range.js
+
 import './App.css';
 import Button from '@mui/material/Button';
 import {useState} from "react";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 /**
  * Obtain the range of dates to be used for searching data
@@ -33,64 +35,71 @@ export default function Range({handleRange}) {
 
     // Handle the GO button click
     function handleGo(event) {
-        handleRange(year,month);
+        handleRange(year, month);
     }
 
     goEnable = month !== '' && year !== ''; // enable the "GO" button if month and year are set
 
-    // The values returned by the Selects can be concatenated to form YYYY-MM
+    // The values returned by the Selects will be reported back to the parent as strings
     // The "GO" button is disabled until the month and year are set to real values
     // TODO - Base the year on the current year and go back 5 years. Currently it's hard-coded to 2023
     return (
         <>
-            <div>
-            <FormControl style={{minWidth: 120, padding:10 }} variant="standard">
-                <InputLabel id="select-month">Month</InputLabel>
-                <Select
-                    labelId="select-month"
-                    id="select-month-id"
-                    value={month}
-                    label="Month"
-                    onChange={handleMonth}
-                >
-                    <MenuItem value="01">January</MenuItem>
-                    <MenuItem value="02">February</MenuItem>
-                    <MenuItem value="03">March</MenuItem>
-                    <MenuItem value="04">April</MenuItem>
-                    <MenuItem value="05">May</MenuItem>
-                    <MenuItem value="06">June</MenuItem>
-                    <MenuItem value="07">July</MenuItem>
-                    <MenuItem value="08">August</MenuItem>
-                    <MenuItem value="09">September</MenuItem>
-                    <MenuItem value="10">October</MenuItem>
-                    <MenuItem value="11">November</MenuItem>
-                    <MenuItem value="12">December</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl style={{minWidth: 120, padding:10}} variant="standard">
-                <InputLabel id="select-year">Year</InputLabel>
-                <Select
-                    labelId="select-year"
-                    id="select-year-id"
-                    value={year}
-                    label="Year"
-                    onChange={handleYear}
-                >
-                    <MenuItem value="2023">2023</MenuItem>
-                    <MenuItem value="2022">2022</MenuItem>
-                    <MenuItem value="2021">2021</MenuItem>
-                    <MenuItem value="2020">2020</MenuItem>
-                    <MenuItem value="2019">2019</MenuItem>
-                </Select>
-            </FormControl>
-            </div>
-            <FormControl>
-                <Button
-                    variant="contained"
-                    disabled={!goEnable}
-                    onClick={handleGo}
-                >GO!</Button>
-            </FormControl>
+            <Card sx={{maxWidth:400}}>
+                <CardContent>
+                    Select the start of the 3-month period to analyze
+                    <div>
+                        <FormControl style={{minWidth: 120, padding: 10}} variant="standard">
+                            <InputLabel id="select-month">Month</InputLabel>
+                            <Select
+                                labelId="select-month"
+                                id="select-month-id"
+                                value={month}
+                                label="Month"
+                                onChange={handleMonth}
+                            >
+                                <MenuItem value="01">January</MenuItem>
+                                <MenuItem value="02">February</MenuItem>
+                                <MenuItem value="03">March</MenuItem>
+                                <MenuItem value="04">April</MenuItem>
+                                <MenuItem value="05">May</MenuItem>
+                                <MenuItem value="06">June</MenuItem>
+                                <MenuItem value="07">July</MenuItem>
+                                <MenuItem value="08">August</MenuItem>
+                                <MenuItem value="09">September</MenuItem>
+                                <MenuItem value="10">October</MenuItem>
+                                <MenuItem value="11">November</MenuItem>
+                                <MenuItem value="12">December</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl style={{minWidth: 120, padding: 10}} variant="standard">
+                            <InputLabel id="select-year">Year</InputLabel>
+                            <Select
+                                labelId="select-year"
+                                id="select-year-id"
+                                value={year}
+                                label="Year"
+                                onChange={handleYear}
+                            >
+                                <MenuItem value="2023">2023</MenuItem>
+                                <MenuItem value="2022">2022</MenuItem>
+                                <MenuItem value="2021">2021</MenuItem>
+                                <MenuItem value="2020">2020</MenuItem>
+                                <MenuItem value="2019">2019</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <FormControl sx={{display: 'flex', alignItems: 'flex-end'}}>
+                        <Button
+                            style={{maxWidth: '40px'}}
+                            size="large"
+                            variant="contained"
+                            disabled={!goEnable}
+                            onClick={handleGo}
+                        >GO!</Button>
+                    </FormControl>
+                </CardContent>
+            </Card>
         </>
     );
 }
